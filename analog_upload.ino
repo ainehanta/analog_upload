@@ -51,7 +51,7 @@ char a3_str[6];
 char a4_str[6];
 char a5_str[6];
 
-uint16_t analog_values[6];
+float analog_values[6];
 
 struct fiap_element fiap_elements [] = {
   { "A0", a0_str, 0, &localtimezone, },
@@ -165,12 +165,12 @@ void loop()
         digitalWrite(RED_LED, HIGH);
         debug_msg("uploading...");
 
-        sprintf(a0_str, "%d", analog_values[0]);
-        sprintf(a1_str, "%d", analog_values[1]);
-        sprintf(a2_str, "%d", analog_values[2]);
-        sprintf(a3_str, "%d", analog_values[3]);
-        sprintf(a4_str, "%d", analog_values[4]);
-        sprintf(a5_str, "%d", analog_values[5]);
+        dtostrf(analog_values[0], -1, 2, a0_str);
+        dtostrf(analog_values[1], -1, 2, a1_str);
+        dtostrf(analog_values[2], -1, 2, a2_str);
+        dtostrf(analog_values[3], -1, 2, a3_str);
+        dtostrf(analog_values[4], -1, 2, a4_str);
+        dtostrf(analog_values[5], -1, 2, a5_str);
 
         for(int i = 0; i < sizeof(fiap_elements)/sizeof(fiap_elements[0]); i++){
           fiap_elements[i].time = epoch;
